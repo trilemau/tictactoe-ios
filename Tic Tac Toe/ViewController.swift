@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     var symbols = Array(repeating: Symbol.None, count: 9)
     var isGameOn = false
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var currentPlayerLabel: UILabel!
     @IBOutlet weak var symbol0Button: UIButton!
     @IBOutlet weak var symbol1Button: UIButton!
@@ -50,13 +51,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var symbol6Button: UIButton!
     @IBOutlet weak var symbol7Button: UIButton!
     @IBOutlet weak var symbol8Button: UIButton!
+    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updatePlayerText()
-        resetGame()
+//        hideStart(hide: false)
+        hideBoard(hide: true)
+    }
+    
+    func hideBoard(hide: Bool) {
+        backgroundImage.isHidden = hide
+        currentPlayerLabel.isHidden = hide
+        symbol0Button.isHidden = hide
+        symbol1Button.isHidden = hide
+        symbol2Button.isHidden = hide
+        symbol3Button.isHidden = hide
+        symbol4Button.isHidden = hide
+        symbol5Button.isHidden = hide
+        symbol6Button.isHidden = hide
+        symbol7Button.isHidden = hide
+        symbol8Button.isHidden = hide
+        resetButton.isHidden = hide
+    }
+    
+    func hideStart(hide: Bool) {
+        startButton.isHidden = hide
     }
     
     func resetGame() {
@@ -350,6 +371,13 @@ class ViewController: UIViewController {
         
         checkWinner()
         switchPlayer()
+    }
+    @IBAction func startButtonPressed(_ sender: UIButton) {
+        hideStart(hide: true)
+        hideBoard(hide: false)
+        
+        updatePlayerText()
+        resetGame()
     }
     
     @IBAction func resetButtonPressed(_ sender: UIButton) {
